@@ -27,3 +27,17 @@ VALUES
 - 100-300(“Средний заказ”)
 - больше 300 (“Большой заказ”)
 */
+
+ALTER TABLE hw_2.sales ADD COLUMN order_size VARCHAR(20);
+
+UPDATE hw_2.sales SET order_size =
+CASE
+    WHEN hw_2.sales.bucket = 'less than equal to 100'
+		THEN 'Маленький заказ'
+	WHEN hw_2.sales.bucket = '101 to 300'
+		THEN 'Средний заказ'
+	WHEN hw_2.sales.bucket = 'greater than 300'
+		THEN 'Большой заказ'
+	ELSE 'Fail'
+    END;
+
