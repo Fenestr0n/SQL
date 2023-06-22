@@ -18,3 +18,22 @@ VALUES
 (1007, 'Rifkin', 'Barcelona', 0.15),
 (1003, 'Axelrod', 'New York', 0.10);
 
+-- Создать таблицу заказчики
+CREATE TABLE customers (
+    cnum INT PRIMARY KEY,
+    cname VARCHAR(25),
+    city VARCHAR(25),
+    rating INT,
+    snum INT,
+    FOREIGN KEY (snum) REFERENCES salespeople (snum)
+);
+
+INSERT customers
+VALUES
+(2001, 'Hoffman', 'London', 100, 1001),
+(2002, 'Giovanni', 'Rome', 200, 1003),
+(2003, 'Liu', 'San Jose', 200, 1002),
+(2004, 'Grass', 'Berlin', 300, 1002),
+(2006, 'Clemens', 'London', 100, 1001),
+(2008, 'Cisneros', 'San Jose', 300, 1007),
+(2007, 'Pereira', 'Rome', 100, 1004);
