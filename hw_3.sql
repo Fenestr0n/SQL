@@ -61,3 +61,26 @@ VALUES
 (3008, 4723, '1990-05-10', 2006, 1001),
 (3010, 1309.95, '1990-06-10', 2004, 1002),
 (3011, 9891.88, '1990-06-10', 2006, 1001);
+
+
+-- Вывести таблицу со столбцами в следующем порядке: city, sname, snum, comm
+SELECT city, sname, snum, comm FROM salespeople;
+
+--Вывести оценку (rating), сопровождаемую именем каждого заказчика в городе San Jose
+SELECT cname, rating FROM customers WHERE city = 'San Jose';
+
+-- Вывести уникальные значения snum всех продавцов из таблицы заказов
+SELECT DISTINCT snum FROM orders;
+
+-- Выбрать заказчиков, чьи имена начинаются с буквы G.
+SELECT * FROM customers WHERE cname LIKE 'G%';
+
+-- Вывести все заказы со значениями суммы выше чем $1.000
+SELECT * FROM orders WHERE amt > 1000;
+
+-- Выбрать наименьшую сумму заказа
+SELECT * FROM orders WHERE amt = (
+	SELECT MIN(amt) FROM orders);
+
+-- Показать всех заказчиков, у которых рейтинг больше 100 и они находятся не в Риме
+SELECT * FROM customers WHERE rating > 100 AND NOT city = 'Rome';
