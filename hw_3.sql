@@ -84,3 +84,44 @@ SELECT * FROM orders WHERE amt = (
 
 -- Показать всех заказчиков, у которых рейтинг больше 100 и они находятся не в Риме
 SELECT * FROM customers WHERE rating > 100 AND NOT city = 'Rome';
+
+
+-- Создать таблицу сотрудники
+CREATE TABLE employee (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(45),
+    surname VARCHAR(45),
+    specialty VARCHAR(45),
+    seniority INT,
+    salary INT,
+    age INT
+);
+
+INSERT employee (name, surname, specialty, seniority, salary, age) VALUES
+('Вася', 'Васькин', 'начальник', 40, 100000, 60),
+('Петя', 'Петькин', 'начальник', 8, 70000, 30),
+('Катя', 'Каткина', 'инженер', 2, 70000, 25),
+('Саша', 'Сашкин', 'инженер', 12, 50000, 35),
+('Иван', 'Иванов', 'рабочий', 40, 30000, 59),
+('Петр', 'Петров', 'рабочий', 20, 25000, 40),
+('Сидор', 'Сидоров', 'рабочий', 10, 20000, 35),
+('Антон', 'Антонов', 'рабочий', 8, 19000, 28),
+('Юра', 'Юркин', 'рабочий', 5, 15000, 25),
+('Максим', 'Воронин', 'рабочий', 2, 11000, 22),
+('Юра', 'Галкин', 'рабочий', 3, 12000, 24),
+('Люся', 'Люськина', 'уборщик', 10, 10000, 49);
+
+-- Отсортируйте поле 'зарплата' в порядке убывания и возрастания
+SELECT * FROM employee ORDER BY salary DESC;
+SELECT * FROM employee ORDER BY salary;
+
+-- Отсортируйте по возрастанию поле 'зарплата' и выведите 5 строк с наибольшей заработной платой
+SELECT * FROM (
+	SELECT * FROM employee ORDER BY salary DESC LIMIT 5) AS temp_table
+ORDER BY salary;
+
+-- Выполните группировку всех сотрудников по специальности, суммарная зарплата которых превышает 100_000
+SELECT specialty, SUM(salary) AS salary_sum
+FROM employee
+GROUP BY specialty
+HAVING salary_sum > 100000;
